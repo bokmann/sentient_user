@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "sentient_user"
     gem.summary = %Q{A trivial bit of common code}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.description = %Q{lets the User model in most authentication frameworks know who is the current user"}
     gem.email = "dbock@codesherpas.com"
     gem.homepage = "http://github.com/bokmann/sentient_user"
     gem.authors = ["bokmann"]

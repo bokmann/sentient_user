@@ -1,0 +1,34 @@
+module SentientUser
+  
+  def self.included(base)
+    base.class_eval {
+      def self.current
+        Thread.current[:user]
+      end
+
+      def self.current=(o)
+        raise(ArgumentError,
+            "Expected an object of class 'User', got #{o.inspect}") unless (o.is_a?(User) || o.nil?)
+        Thread.current[:user] = o
+      end
+  
+      def make_current
+        Thread.current[:user] = self
+      end
+
+      def current?
+        !Thread.current[:user].nil? && self.id == Thread.current[:user].id
+      end
+    }
+  end
+end
+
+module SentientController
+  def self.included(base)
+    base.class_eval {
+      before_filter do |c|
+        User.current = c.current_user
+      end
+    }
+  end
+end
