@@ -8,3 +8,13 @@ require 'sentient_user'
 
 class Test::Unit::TestCase
 end
+
+class Person
+  include SentientUser
+end
+
+class User
+  include SentientUser
+end
+
+class AnonymousUser < User ; end
