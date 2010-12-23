@@ -19,6 +19,14 @@ module SentientUser
       def current?
         !Thread.current[:user].nil? && self.id == Thread.current[:user].id
       end
+      
+      def self.do_as(user, &block)
+        old_user = self.current
+        self.current = user
+        response = block.call unless block.nil?
+        self.current = old_user
+        response
+      end
     }
   end
 end
