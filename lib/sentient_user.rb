@@ -22,9 +22,14 @@ module SentientUser
       
       def self.do_as(user, &block)
         old_user = self.current
-        self.current = user
-        response = block.call unless block.nil?
-        self.current = old_user
+
+        begin
+          self.current = user
+          response = block.call unless block.nil?
+        ensure
+          self.current = old_user
+        end
+
         response
       end
     }
