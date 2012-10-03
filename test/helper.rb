@@ -18,3 +18,8 @@ class User
 end
 
 class AnonymousUser < User ; end
+
+ExceptedWords = %w{ hackery hacky monkeypatching
+                    ActiveRecord SentientUser SentientController
+                    initializer config rakefile bokmann
+                    }

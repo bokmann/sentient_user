@@ -6,23 +6,23 @@ class TestSentientUser < Test::Unit::TestCase
     p.make_current
     assert_equal Person.current, p
   end
-  
+
   should "allow making the 'user' class sentient" do
     u = User.new
     u.make_current
     assert_equal User.current, u
   end
-  
+
   should "not allow making Person.current a user" do
     assert_raise ArgumentError do
       Person.current = User.new
     end
   end
-  
+
   should "allow making person.current a person" do
     Person.current = Person.new
   end
-  
+
   should "allow subclasses of user to be assigned to user.current" do
     User.current = AnonymousUser.new
   end
@@ -46,4 +46,18 @@ class TestSentientUser < Test::Unit::TestCase
       assert_equal Person.current, p
     end
   end
+
+  should "have no spelling errors in its README" do
+    begin
+      aspell_output = `cat #{File.dirname(__FILE__)}/../README.rdoc | aspell list`
+    rescue => err
+      warn "You probably don't have aspell. On mac: brew install aspell --lang=en"
+      raise err
+    end
+    misspellings = aspell_output.split($/) - ExceptedWords
+    assert_equal [], misspellings
+  end
+
+  # should "have no spelling errors in the license" do
+  # end
 end
