@@ -66,4 +66,5 @@ PLATFORMS
 DEPENDENCIES
   font-awesome-rails!
   rake
+  rdoc
   shoulda (>= 2.11.3)
