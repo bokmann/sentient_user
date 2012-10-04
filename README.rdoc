@@ -1,11 +1,11 @@
 = sentient_user
 
-How many times have you needed access to the current user in your models?  It happens a lot if you aretrying to do some intelligent logging, if you want the models to control some aspect of their access, and so on.  This is easy hackery that you can find in blogs entries all over the web, but I wanted a nice package for it, for eseveral reasons:
+How often have you needed to access the current user in your models?  This happens often if you are attempting intelligent logging or if you want the models to control some aspect of their access, etc.  This is easy hackery that you can find in many blog entries, but I wanted a nice package for it, for several reasons:
 
 * There are several different ways this can be accomplished, but only the variation that uses Thread.local is safe for use in thread-safe rails.
-* Even the Thread.local is considered slightly hacky (but better than monkeypatching ActiveRecord::Base)
-* Should fashions change in this area in Rails' future, I want one place to change it, but I want to keep my methods working.
-* This concept generally breaks in the console, where there is no controller to set the user.  This gem adds a make_current method on the user instance, so you can choose to find a user and execute this method.  That could be really useful in rake tasks, for insntance.
+* Even using Thread.local is considered slightly hacky (but better than monkeypatching ActiveRecord::Base)
+* Should fashions change in this area in Rails' future, I want one place to change it, and to keep my methods working.
+* This concept generally breaks in the console, where there is no controller to set the user.  This gem adds a make_current method on the user instance, so you can choose to find a user and execute the current_user method.  That could be really useful in rake tasks, for instance.
 
 
 == Usage
@@ -17,17 +17,17 @@ include SentientController in your application controller
 * You have a current_user method available to your controllers
 * You will write your own tests to cover this code.
 
-If those assumptions don't work for you, feel free to unpack and hack.  Its simple enough code to change.  I purposefully didn't want to complicate it with an initializer, several config options, etc. as all that would blur this delightfully simple piece of code.
+If those assumptions don't work for you, feel free to unpack and hack.  It's simple enough code to change.  I purposefully didn't want to complicate it with an initializer, several config options, etc. as all that would blur this delightfully simple piece of code.
 
 
 == Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
+* Add tests for it. This is important so I don't break it
+  unintentionally in a future version.
 * Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+  (if you want to have your own version, that is fine but please bump the version in a commit by itself which I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
