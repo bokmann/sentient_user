@@ -1,5 +1,7 @@
 = sentient_user
 
+{<img src="https://secure.travis-ci.org/bokmann/sentient_user.png" />}[http://travis-ci.org/bokmann/sentient_user]
+
 How often have you needed to access the current user in your models?  This happens often if you are attempting intelligent logging or if you want the models to control some aspect of their access, etc.  This is easy hackery that you can find in many blog entries, but I wanted a nice package for it, for several reasons:
 
 * There are several different ways this can be accomplished, but only the variation that uses Thread.local is safe for use in thread-safe rails.
@@ -21,7 +23,7 @@ If those assumptions don't work for you, feel free to unpack and hack.  It's sim
 
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it
