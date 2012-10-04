@@ -15,11 +15,12 @@ require 'rdoc/rdoc'
 require 'rdoc/task'
 
 
+require File.expand_path('../lib/sentient_user/version.rb', __FILE__)
+
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "business_time #{version}"
+  rdoc.title = "sentient_user #{SentientUser::VERSION}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
