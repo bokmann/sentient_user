@@ -48,16 +48,10 @@ class TestSentientUser < Test::Unit::TestCase
   end
 
   should "have no spelling errors in its README" do
-    begin
-      aspell_output = `cat #{File.dirname(__FILE__)}/../README.rdoc | aspell list`
-    rescue => err
-      warn "You probably don't have aspell. On mac: brew install aspell --lang=en"
-      raise err
-    end
-    misspellings = aspell_output.split($/) - ExceptedWords
-    assert_equal [], misspellings
+    check_spelling_in_file "README.rdoc"
   end
 
-  # should "have no spelling errors in the license" do
-  # end
+  should "have no spelling errors in the license" do
+    check_spelling_in_file "LICENSE"
+  end
 end
