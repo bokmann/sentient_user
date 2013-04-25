@@ -1,47 +1,62 @@
+require 'sentient_user/railtie'
+
 module SentientUser
-  
-  def self.included(base)
-    base.class_eval {
+
+  mattr_accessor :sentient_types
+  @@sentient_types = [:user]
+
+  def self.setup
+    yield self
+  end
+
+  # where type is a symbol indicating one of the sentient_types as specified in the config, i.e. :user
+  def be_sentient(type)
+    self.class_eval <<-EVAL
+
       def self.current
-        Thread.current[:user]
+        Thread.current[:#{type}]
       end
 
       def self.current=(o)
         raise(ArgumentError,
-            "Expected an object of class '#{self}', got #{o.inspect}") unless (o.is_a?(self) || o.nil?)
-        Thread.current[:user] = o
+              "Expected an object of class '\#{self}', got \#{o.inspect}") unless (o.is_a?(self) || o.nil?)
+        Thread.current[:#{type}] = o
       end
-  
+
       def make_current
-        Thread.current[:user] = self
+        Thread.current[:#{type}] = self
       end
 
       def current?
-        !Thread.current[:user].nil? && self.id == Thread.current[:user].id
+        !Thread.current[:#{type}].nil? && self.id == Thread.current[:#{type}].id
       end
-      
-      def self.do_as(user, &block)
-        old_user = self.current
+
+      def self.do_as(object, &block)
+        old_object = self.current
 
         begin
-          self.current = user
+          self.current = object
           response = block.call unless block.nil?
         ensure
-          self.current = old_user
+          self.current = old_object
         end
 
         response
       end
-    }
+    EVAL
   end
+
 end
 
 module SentientController
   def self.included(base)
-    base.class_eval {
+    base.class_eval do
       before_filter do |c|
-        User.current = c.send(:current_user)
+        SentientUser.sentient_types.each do |type|
+          clazz = Module.const_get(type.to_s.camelize)
+          clazz.current = c.send("current_#{type}".to_sym)
+        end
       end
-    }
+    end
   end
 end

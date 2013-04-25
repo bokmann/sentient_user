@@ -21,3 +21,6 @@ pkg
 ## PROJECT::SPECIFIC
 .bundle
 vendor
+
+## rubymine garbage
+.idea
