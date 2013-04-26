@@ -46,6 +46,18 @@ class TestSentientUser < Test::Unit::TestCase
       assert_equal Person.current, p
     end
   end
+  
+  # We don't want to allow this because it would allow for a false sense that things will work, even though
+  # they won't.  If you don't add the registered type, the controller won't ever store that current_object
+  # in Thread.current, and if later code expects it to be there it will fail.
+  should "not allow calls to be_sentient for unregistered types" do
+    assert_raise ArgumentError do
+      class UnregisteredType
+        extend SentientUser
+        be_sentient
+      end
+    end
+  end
 
   should "have no spelling errors in its README" do
     check_spelling_in_file "README.rdoc"

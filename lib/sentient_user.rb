@@ -10,7 +10,10 @@ module SentientUser
   end
 
   # where type is a symbol indicating one of the sentient_types as specified in the config, i.e. :user
-  def be_sentient(type)
+  def be_sentient
+    type = self.name.underscore.to_sym
+    raise(ArgumentError, 
+          "#{type} is not a pre-registered sentient type.  Expected one of [#{SentientUser.sentient_types.join(', ')}]") unless SentientUser.sentient_types.include?(type)
     self.class_eval <<-EVAL
 
       def self.current
