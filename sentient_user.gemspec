@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = SentientUser::VERSION
 
-  gem.add_dependency "railties", "~> 3.1"
+  gem.add_dependency "railties", ">= 3.1"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rdoc"
   gem.add_development_dependency "shoulda", ">= 2.11.3"
