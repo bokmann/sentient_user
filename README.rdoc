@@ -2,21 +2,33 @@
 
 {<img src="https://secure.travis-ci.org/bokmann/sentient_user.png" />}[http://travis-ci.org/bokmann/sentient_user]
 
-How often have you needed to access the current user in your models?  This happens often if you are attempting intelligent logging or if you want the models to control some aspect of their access, etc.  This is easy hackery that you can find in many blog entries, but I wanted a nice package for it, for several reasons:
+How often have you needed to access the current user (or some other current_<object> that is available in your controller) in your models?  This happens often if you are attempting intelligent logging or if you want the models to control some aspect of their access, etc.  This is easy hackery that you can find in many blog entries, but I wanted a nice package for it, for several reasons:
 
 * There are several different ways this can be accomplished, but only the variation that uses Thread.local is safe for use in thread-safe rails.
 * Even using Thread.local is considered slightly hacky (but better than monkeypatching ActiveRecord::Base)
 * Should fashions change in this area in Rails' future, I want one place to change it, and to keep my methods working.
-* This concept generally breaks in the console, where there is no controller to set the user.  This gem adds a make_current method on the user instance, so you can choose to find a user and execute the current_user method.  That could be really useful in rake tasks, for instance.
+* This concept generally breaks in the console, where there is no controller to set the user.  This gem adds a make_current method on the user (or other) instance, so you can choose to find a user and execute the current_user method.  That could be really useful in rake tasks, for instance.
 
 
 == Usage
-include SentientUser in your user model
-include SentientController in your application controller
+1. Register all your types that will need to be sentient.  In an initializer:
+    SentientUser.setup do |config|
+        config.sentient_types = [:user, :my_other_model]
+    end
+   Note:: 
+   By default, the value of sentient_types is just [:user]
+
+2. In the model class you wish to be sentient, simply call:
+    be_sentient
+   Note::
+   This needs to be one of the pre-registered types from your initializer (again, the User class is registered
+   automatically)
+
+3. Include the controller module your application controller:
+    include SentientController
 
 == Assumptions and limitations
-* Your user model is called 'User'.
-* You have a current_user method available to your controllers
+* You have a current_<type> method available to your controllers for each of the types registered with the gem
 * You will write your own tests to cover this code.
 
 If those assumptions don't work for you, feel free to unpack and hack.  It's simple enough code to change.  I purposefully didn't want to complicate it with an initializer, several config options, etc. as all that would blur this delightfully simple piece of code.
