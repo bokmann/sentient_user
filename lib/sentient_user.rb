@@ -52,14 +52,23 @@ module SentientUser
 end
 
 module SentientController
-  def self.included(base)
-    base.class_eval do
-      before_filter do |c|
-        SentientUser.sentient_types.each do |type|
-          clazz = Module.const_get(type.to_s.camelize)
-          clazz.current = c.send("current_#{type}".to_sym)
-        end
-      end
+
+  # call this in your controller as a before filter.  It should be called
+  # after your types are authenticated, but before any other filters in case
+  # those filters do anything worth tracking.
+  def store_sentient_types
+    SentientUser.sentient_types.each do |type|
+      clazz = Module.const_get(type.to_s.camelize)
+      clazz.current = self.send("current_#{type}".to_sym)
     end
   end
+
+  # Optional after_filter that just sets the current value to nil
+  def clear_sentient_types
+    SentientUser.sentient_types.each do |type|
+      clazz = Module.const_get(type.to_s.camelize)
+      clazz.current = nil
+    end
+  end
+
 end
