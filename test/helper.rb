@@ -1,8 +1,7 @@
 require 'rubygems'
 require 'test/unit'
-require 'shoulda'
-require 'simplecov'
-SimpleCov.start
+require "minitest/autorun"
+require "minitest/should"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
@@ -24,7 +23,7 @@ class AnonymousUser < User ; end
 ExceptedWords = %w{ hackery hacky monkeypatching
                     ActiveRecord SentientUser SentientController
                     initializer config rakefile bokmann
-                    sublicense MERCHANTABILITY NONINFRINGEMENT
+                    sublicense MERCHANTABILITY NONINFRINGEMENT img src
                     }
 
 def check_spelling_in_file(path_relative_to_gem_root)

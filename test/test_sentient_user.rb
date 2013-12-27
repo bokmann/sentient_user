@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestSentientUser < Test::Unit::TestCase
+class TestTruth < Minitest::Should::TestCase
   should "allow making the 'person' class sentient" do
     p = Person.new
     p.make_current
@@ -14,7 +14,7 @@ class TestSentientUser < Test::Unit::TestCase
   end
 
   should "not allow making Person.current a user" do
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       Person.current = User.new
     end
   end
