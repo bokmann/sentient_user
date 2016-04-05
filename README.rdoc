@@ -11,8 +11,8 @@ How often have you needed to access the current user in your models?  This happe
 
 
 == Usage
-include SentientUser in your user model
-include SentientController in your application controller
+* include SentientUser in your user model
+* include SentientController in your application controller
 
 == Assumptions and limitations
 * Your user model is called 'User'.
@@ -34,4 +34,4 @@ If those assumptions don't work for you, feel free to unpack and hack.  It's sim
 
 == Copyright
 
-Copyright (c) 2010 bokmann. See LICENSE for details.
+Copyright (c) 2009-2016 bokmann. See LICENSE for details.
