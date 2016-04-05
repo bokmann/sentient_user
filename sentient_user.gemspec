@@ -3,7 +3,7 @@ require File.expand_path('../lib/sentient_user/version.rb', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["bokmann"]
-  gem.email         = ["dbock@codesherpas.com"]
+  gem.email         = ["dbock@javaguy.org"]
   gem.description   = %q{lets the User model in most authentication frameworks know who is the current user}
   gem.summary       = %q{A trivial bit of common code}
   gem.homepage      = "http://github.com/bokmann/sentient_user"
