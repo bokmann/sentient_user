@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'test/unit'
+#require 'test/unit'
 require "minitest/autorun"
 require "minitest/should"
 
@@ -7,8 +7,8 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'sentient_user'
 
-class Test::Unit::TestCase
-end
+#class Test::Unit::TestCase
+#end
 
 class Person
   include SentientUser
