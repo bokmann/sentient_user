@@ -17,9 +17,16 @@ How often have you needed to access the current user in your models?  This happe
 == Assumptions and limitations
 * Your user model is called 'User'.
 * You have a current_user method available to your controllers
-* You will write your own tests to cover this code.
+* You will write your own tests to cover this code. The gem has tests, but its up to you to make sure you use this ability wisely.
 
 If those assumptions don't work for you, feel free to unpack and hack.  It's simple enough code to change.  I purposefully didn't want to complicate it with an initializer, several config options, etc. as all that would blur this delightfully simple piece of code.
+
+
+== Recent Changes
+This gem has been remarkably stable for many years and many iterations of rails.  The recent deprecation of before_filter in favor of before_action is making me update it.
+
+* 0.4.0 - for use on Rails 5 and beyond.
+* 0.3.3 - for versions prior to rails 5.
 
 
 == Note on Patches/Pull Requests

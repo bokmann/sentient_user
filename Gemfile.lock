@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sentient_user (0.3.3)
+    sentient_user (0.4.0)
       railties (>= 3.1)
 
 GEM
@@ -27,7 +27,7 @@ GEM
     json (1.8.3)
     minitest (4.7.5)
     minitest_should (0.3.1)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -64,4 +64,4 @@ DEPENDENCIES
   turn
 
 BUNDLED WITH
-   1.11.2
+   1.13.1
