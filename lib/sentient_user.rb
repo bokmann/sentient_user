@@ -39,7 +39,7 @@ end
 module SentientController
   def self.included(base)
     base.class_eval {
-      before_filter do |c|
+      before_action do |c|
         User.current = c.send(:current_user)
       end
     }
