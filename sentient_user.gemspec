@@ -16,6 +16,8 @@ Gem::Specification.new do |gem|
   gem.version       = SentientUser::VERSION
 
   gem.add_dependency "railties", ">= 3.1"
+  gem.add_dependency 'request_store', '1.1'
+
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rdoc"
   gem.add_development_dependency "minitest", "4.7.5"
