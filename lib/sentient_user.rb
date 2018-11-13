@@ -42,6 +42,10 @@ module SentientController
       before_action do |c|
         User.current = c.send(:current_user)
       end
+
+      after_action do |c|
+        User.current = nil
+      end
     }
   end
 end
